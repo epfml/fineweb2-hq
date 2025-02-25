@@ -1,0 +1,19 @@
+batch_size: 16
+generation: null
+logging:
+  output_dir: null
+parallelism:
+  dp: 4
+  expert_parallel_size: 1
+  pp: 1
+  pp_engine: 1f1b
+  tp: 1
+  tp_linear_async_communication: true
+  tp_mode: REDUCE_SCATTER
+tasks:
+  custom_tasks: lighteval.tasks.multilingual.tasks
+  dataset_loading_processes: 16
+  max_samples: 1000
+  multichoice_continuations_start_space: null
+  num_fewshot_seeds: null
+  tasks: lighteval|exams_ara_cf|0|1,lighteval|mmlu_ara_cf|0|1,lighteval|alghafa_arc_ara_cf:easy|0|1,lighteval|alghafa_sciqa_ara_cf|0|1,lighteval|belebele_arb_Arab_cf|0|1,lighteval|soqal_ara_cf|0|1,lighteval|mlqa_ara|0|1,lighteval|tydiqa_ara|0|1,lighteval|alghafa_race_ara_cf|0|1,lighteval|arcd_ara|0|1,lighteval|xcodah_ara_cf|0|1,lighteval|alghafa_piqa_ara_cf|0|1,lighteval|xcsqa_ara_cf|0|1,lighteval|xnli2.0_ara_cf|0|1,lighteval|mlmm_hellaswag_ara_cf|0|1,lighteval|xstory_cloze_ara_cf|0|1

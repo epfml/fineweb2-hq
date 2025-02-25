@@ -1,0 +1,19 @@
+batch_size: 16
+generation: null
+logging:
+  output_dir: null
+parallelism:
+  dp: 4
+  expert_parallel_size: 1
+  pp: 1
+  pp_engine: 1f1b
+  tp: 1
+  tp_linear_async_communication: true
+  tp_mode: REDUCE_SCATTER
+tasks:
+  custom_tasks: lighteval.tasks.multilingual.tasks
+  dataset_loading_processes: 16
+  max_samples: 1000
+  multichoice_continuations_start_space: null
+  num_fewshot_seeds: null
+  tasks: lighteval|meta_mmlu_deu_cf|0|1,lighteval|mlmm_arc_deu_cf:challenge|0|1,lighteval|mintaka_deu|0|1,lighteval|belebele_deu_Latn_cf|0|1,lighteval|xcodah_deu_cf|0|1,lighteval|xcsqa_deu_cf|0|1,lighteval|mlmm_hellaswag_deu_cf|0|1,lighteval|xnli2.0_deu_cf|0|1

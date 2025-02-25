@@ -1,0 +1,92 @@
+checkpoints:
+  checkpoint_interval: 1000
+  checkpoints_path: checkpoints/
+  checkpoints_path_is_shared_file_system: false
+  resume_checkpoint_path: null
+  save_initial_state: false
+data_stages:
+  - data:
+      dataset:
+        dataset_folder: template
+      num_loading_workers: 1
+      seed: 42
+    name: General purpose training (Single dataset)
+    start_training_step: 1
+general:
+  benchmark_csv_path: null
+  consumed_train_samples: null
+  ignore_sanity_checks: true
+  project: template
+  run: template
+  seed: 42
+  step: null
+lighteval: null
+logging:
+  iteration_step_info_interval: 1
+  log_level: info
+  log_level_replica: info
+model:
+  ddp_bucket_cap_mb: 25
+  dtype: bfloat16
+  init_method:
+    std: 0.025
+  make_vocab_size_divisible_by: 1
+  model_config:
+    bos_token_id: 1
+    eos_token_id: 2
+    hidden_act: silu
+    hidden_size: 1536
+    initializer_range: 0.02
+    intermediate_size: 6144
+    is_llama_config: true
+    max_position_embeddings: 1024
+    num_hidden_layers: 24
+    num_attention_heads: 16
+    num_key_value_heads: 16
+    pad_token_id: null
+    pretraining_tp: 1
+    rms_norm_eps: 1.0e-06
+    rope_scaling: null
+    tie_word_embeddings: true
+    use_cache: true
+    vocab_size: 131072
+optimizer:
+  optimizer_factory:
+    adam_beta1: 0.9
+    adam_beta2: 0.95
+    adam_eps: 1.0e-08
+    name: adamW
+    torch_adam_is_fused: true
+  learning_rate_scheduler:
+    learning_rate: 0.0008
+    lr_decay_starting_step: 61001 # for 119B tokens (36001 for 70B tokens, 15001 for 30B tokens)
+    lr_decay_steps: 12000 # for 119B tokens (7000 for 70B tokens, 4000 for 30B tokens)
+    lr_decay_style: 1-sqrt
+    lr_warmup_steps: 2000
+    lr_warmup_style: linear
+    min_decay_lr: 0.00
+  zero_stage: 0
+  clip_grad: 1.0
+  weight_decay: 0.1
+  accumulate_grad_in_fp32: true
+parallelism:
+  dp: 80
+  expert_parallel_size: 1
+  pp: 1
+  pp_engine: 1f1b
+  tp: 1
+  tp_linear_async_communication: true
+  tp_mode: REDUCE_SCATTER
+profiler: null
+tokenizer:
+  tokenizer_max_length: null
+  tokenizer_name_or_path: mistralai/Mistral-Nemo-Base-2407
+  tokenizer_revision: null
+tokens:
+  batch_accumulation_per_replica: 1
+  limit_test_batches: 0
+  limit_val_batches: 0
+  micro_batch_size: 20
+  sequence_length: 1024
+  train_steps: 73000  # for 119B tokens (43000 for 70B tokens, 19000 for 30B tokens)
+  val_check_interval: -1
